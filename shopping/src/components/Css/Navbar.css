@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Logo / Title */
+.navbar .logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.navbar .logo:hover {
+  color: #3182ce;
+}
+
+/* Cart button */
+.navbar .cart-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #3182ce;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 8px rgba(49, 130, 206, 0.3);
+}
+
+.navbar .cart-btn:hover {
+  background-color: #2b6cb0;
+}
+
+/* Cart count badge */
+.navbar .cart-count {
+  background-color: #fff;
+  color: #3182ce;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
