@@ -1,0 +1,34 @@
+.home-container {
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.filter-sort-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.filter-sort-bar select {
+    border: 1px solid #d1d5db;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.filter-sort-bar select:hover {
+    border-color: #000;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
