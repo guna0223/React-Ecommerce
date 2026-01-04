@@ -7,8 +7,13 @@ function ProductCard({ product }) {
 
   return (
     <div className="product-card">
-      <img src={product.image} alt={product.title} />
-      <h2 className="title">{product.title}</h2>
+      <Link to={`/product/${product.id}`}>
+        <img src={product.image} alt={product.title} className="h-40 mx-auto object-contain" />
+      </Link>
+
+      <Link to={`/product/${product.id}`} className="card-title-link">
+        <h2 className="text-sm mt-3 line-clamp-2">{product.title}</h2>
+      </Link>
       <p className="price">${product.price}</p>
       <button onClick={() => addToCart(product)}>Add to Cart</button>
     </div>
