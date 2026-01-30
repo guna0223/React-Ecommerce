@@ -10,11 +10,17 @@ function Home() {
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState("");
+  const [loading, setLoading] = useState(true);
   const { searchTerm } = useContext(CartContext);
 
   useEffect(() => {
-    axios.get("https://fakestoreapi.com/products")
-      .then(res => setProducts(res.data));
+    setLoading(true);
+    // Fetch all products (FakeStoreAPI returns up to 20 products by default)
+    axios.get("https://fakestoreapi.com/products?limit=20")
+      .then(res => {
+        setProducts(res.data);
+        setLoading(false);
+      });
 
     axios.get("https://fakestoreapi.com/products/categories")
       .then(res => setCategories(res.data));
@@ -40,9 +46,9 @@ function Home() {
         {/* Filter & Sort */}
         <div className="filter-sort-bar">
           <select onChange={(e) => setFilter(e.target.value)}>
-            <option value="all">All</option>
+            <option value="all">All Categories</option>
             {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
+              <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
             ))}
           </select>
 
@@ -53,10 +59,13 @@ function Home() {
           </select>
         </div>
 
+        {/* Loading State */}
+        {loading && <div className="loading">Loading products...</div>}
+
         {/* Products */}
         <div className="products-grid">
-          {finalProducts.length === 0 && <h3>No products found</h3>}
-          {finalProducts.map(product => (
+          {!loading && finalProducts.length === 0 && <h3 className="no-products">No products found</h3>}
+          {!loading && finalProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

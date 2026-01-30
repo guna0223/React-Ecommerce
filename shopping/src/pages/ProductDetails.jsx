@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "../components/ProducCard/ProductCard";
+import { CartContext } from "../context/CartContext";
+import "../components/Css/ProductDetails.css";
 
 function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [recommended, setRecommended] = useState([]);
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/${id}`)
@@ -23,18 +26,23 @@ function ProductDetails() {
             });
     }, [id]);
 
-    if (!product) return <h2>Loading...</h2>;
+    if (!product) return <div className="loading">Loading...</div>;
 
     return (
         <section className="details-container">
             <div className="product-details">
                 <img src={product.image} alt={product.title} className="details-image" />
-                <div>
+                <div className="details-info">
                     <h1>{product.title}</h1>
-                    <p className="price">$ {product.price}</p>
-                    <p>{product.description}</p>
-                    <p><b>Category:</b> {product.category}</p>
-                    <button className="add-btn">Add to Cart</button>
+                    <p className="price">${product.price.toFixed(2)}</p>
+                    <p className="category"><b>Category:</b> {product.category}</p>
+                    <p className="description">{product.description}</p>
+                    <button 
+                        onClick={() => addToCart(product)} 
+                        className="add-btn"
+                    >
+                        Add to Cart
+                    </button>
                 </div>
             </div>
 
