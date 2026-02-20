@@ -102,17 +102,21 @@
   margin-bottom: 20px;
 }
 
-.details-rating .stars {
-  display: flex;
+.details-rating .rating-badge {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
-.details-rating .stars i {
-  font-size: 18px !important;
-  color: var(--gold) !important;
-  margin-right: 2px;
+.details-rating .rating-badge i {
+  font-size: 14px;
+  margin-left: 4px;
 }
 
-.details-rating span {
+.details-rating span:last-child {
   font-size: 14px;
   color: var(--gray-medium);
 }

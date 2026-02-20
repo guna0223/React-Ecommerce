@@ -159,18 +159,22 @@
 .product-rating {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   margin-top: 4px;
 }
 
-.stars {
-  display: flex;
-  gap: 2px;
+.rating-badge {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-.stars i {
-  font-size: 14px !important;
-  color: var(--gold) !important;
+.rating-badge i {
+  font-size: 12px;
+  margin-left: 2px;
 }
 
 .rating-count {

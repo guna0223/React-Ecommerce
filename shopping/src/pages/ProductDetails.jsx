@@ -87,15 +87,8 @@ function ProductDetails() {
                     <h1>{product.title}</h1>
                     
                     <div className="details-rating">
-                        <div className="stars">
-                            {[...Array(5)].map((_, i) => (
-                                <i 
-                                    key={i} 
-                                    className={`bi ${i < Math.floor(rating) ? 'bi-star-fill' : 'bi-star'}`}
-                                ></i>
-                            ))}
-                        </div>
-                        <span>{rating} ({reviewCount} reviews)</span>
+                        <span className="rating-badge">{rating} <i className="bi bi-star-fill"></i></span>
+                        <span>({reviewCount} reviews)</span>
                     </div>
 
                     <p className="price">₹{convertToINR(product.price).toLocaleString('en-IN')}</p>

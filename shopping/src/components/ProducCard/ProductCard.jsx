@@ -54,15 +54,8 @@ function ProductCard({ product }) {
         </Link>
 
         <div className="product-rating">
-          <div className="stars">
-            {[...Array(5)].map((_, i) => (
-              <i 
-                key={i} 
-                className={`bi ${i < Math.floor(rating) ? 'bi-star-fill' : 'bi-star'}`}
-              ></i>
-            ))}
-          </div>
-          <span className="rating-count">({reviewCount})</span>
+          <span className="rating-badge">{rating} <i className="bi bi-star-fill"></i></span>
+          <span className="rating-count">({reviewCount} reviews)</span>
         </div>
 
         <p className="product-price">₹{convertToINR(product.price).toLocaleString('en-IN')}</p>
