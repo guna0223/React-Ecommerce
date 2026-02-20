@@ -1,0 +1,175 @@
+/* ============================================
+   Global Styles - Navy & Gold Theme
+   ============================================ */
+
+:root {
+  --primary-navy: #001F3F;
+  --accent-gold: #FFD700;
+  --white: #FFFFFF;
+  --light-gray: #F5F5F5;
+  --text-dark: #1a1a1a;
+  --text-gray: #666666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background-color: var(--light-gray);
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Main App Layout */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Loading Spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--light-gray);
+  border-top: 3px solid var(--accent-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  color: var(--primary-navy);
+  font-weight: 500;
+}
+
+/* No Products State */
+.no-products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  text-align: center;
+  gap: 1rem;
+}
+
+.no-products i {
+  font-size: 3rem;
+  color: var(--primary-navy);
+  opacity: 0.3;
+}
+
+.no-products h3 {
+  font-size: 1.25rem;
+  color: var(--primary-navy);
+}
+
+.no-products p {
+  color: var(--text-gray);
+}
+
+/* Home Container */
+.home-container {
+  width: 100%;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary-navy);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: var(--accent-gold);
+  color: var(--primary-navy);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-navy);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Selection Color */
+::selection {
+  background: var(--accent-gold);
+  color: var(--primary-navy);
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  main {
+    padding: 0.75rem;
+  }
+}

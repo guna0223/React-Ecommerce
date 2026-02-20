@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "../components/css/Cart.css";
+import "../components/Css/Cart.css";
 
 // Convert USD to INR
 const convertToINR = (usdPrice) => {

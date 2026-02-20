@@ -54,10 +54,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
-      <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} ShopHub. All rights reserved.</p>
-      </div>
     </footer>
   );
 };

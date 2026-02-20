@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import ProductCard from "../components/ProducCard/ProductCard";
+import CarouselImage from "../components/CarouselImages/CarouselImage";
 import { CartContext } from "../context/CartContext";
 import { getAllProducts } from "../service/api";
 
@@ -40,6 +41,9 @@ function Home() {
 
   return (
     <div className="home-container">
+      {/* Carousel */}
+      <CarouselImage />
+
       {/* Loading State */}
       {loading && (
         <div className="loading-container">

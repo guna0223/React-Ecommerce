@@ -25,7 +25,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <Link to="/" className="logo">FAKE<span>STORE</span></Link>
+        <Link to="/" className="logo">Vexo</Link>
       </div>
 
       {/* SEARCH BAR */}
@@ -87,9 +87,21 @@ function Navbar() {
       </button>
 
       {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="mobile-menu">
-          <div className="mobile-filter-section">
+      <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
+        {/* Search Bar - Mobile */}
+        <form onSubmit={handleSearch} className="search-bar">
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button type="submit" className="search-btn">
+            <i className="bi bi-search"></i>
+          </button>
+        </form>
+
+        <div className="mobile-filter-section">
             <label>Category</label>
             <select 
               value={selectedCategory} 
@@ -125,8 +137,7 @@ function Navbar() {
             </Link>
           </div>
         </div>
-      )}
-    </nav>
+      </nav>
   );
 }
 

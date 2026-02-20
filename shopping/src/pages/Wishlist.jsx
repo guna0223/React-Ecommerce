@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import ProductCard from "../components/ProducCard/ProductCard";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "../components/css/Cart.css";
+import "../components/Css/Cart.css";
 
 function Wishlist() {
   const { wishlist } = useContext(CartContext);
