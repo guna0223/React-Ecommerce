@@ -1,8 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
 import ProductCard from "../components/ProducCard/ProductCard";
 import { CartContext } from "../context/CartContext";
+
+import { getProductById, getAllProducts } from "../service/api";
+
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../components/Css/ProductDetails.css";
 
@@ -21,15 +23,18 @@ function ProductDetails() {
     useEffect(() => {
         setLoading(true);
         window.scrollTo(0, 0);
-        axios.get(`https://fakestoreapi.com/products/${id}`)
-            .then(res => {
-                setProduct(res.data);
-                return res.data.category;
+        
+        // Get product by ID
+        getProductById(id)
+            .then(data => {
+                setProduct(data);
+                return data.category;
             })
             .then(category => {
-                axios.get("https://fakestoreapi.com/products")
-                    .then(res => {
-                        const rec = res.data.filter(p => p.category === category && p.id != id);
+                // Get all products and filter by category
+                getAllProducts()
+                    .then(allProducts => {
+                        const rec = allProducts.filter(p => p.category === category && p.id != id);
                         setRecommended(rec.slice(0, 4));
                         setLoading(false);
                     });
