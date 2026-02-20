@@ -1,28 +1,50 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../Css/Footer.css";
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-section">
-          <h3 className="footer-logo">ShopHub</h3>
-          <p className="footer-description">
-            Your one-stop destination for premium products at unbeatable prices.
+      <div className="footer-top">
+        {/* About Section */}
+        <div className="footer-about">
+          <div className="footer-logo">
+            <span className="v">V</span><span className="exo">EXO</span>
+          </div>
+          <p>
+            Your premier destination for premium products at unbeatable prices. 
+            We deliver quality, style, and value to millions of customers worldwide.
           </p>
+          <div className="footer-social">
+            <a href="#" className="social-icon" aria-label="Facebook">
+              <i className="bi bi-facebook"></i>
+            </a>
+            <a href="#" className="social-icon" aria-label="Twitter">
+              <i className="bi bi-twitter-x"></i>
+            </a>
+            <a href="#" className="social-icon" aria-label="Instagram">
+              <i className="bi bi-instagram"></i>
+            </a>
+            <a href="#" className="social-icon" aria-label="YouTube">
+              <i className="bi bi-youtube"></i>
+            </a>
+          </div>
         </div>
-        
-        <div className="footer-section">
+
+        {/* Quick Links */}
+        <div className="footer-column">
           <h4>Quick Links</h4>
           <ul className="footer-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/cart">Cart</a></li>
-            <li><a href="/wishlist">Wishlist</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/">Shop</Link></li>
+            <li><Link to="/wishlist">Wishlist</Link></li>
+            <li><Link to="/cart">Cart</Link></li>
           </ul>
         </div>
-        
-        <div className="footer-section">
-          <h4>Customer Service</h4>
+
+        {/* Customer Support */}
+        <div className="footer-column">
+          <h4>Customer Support</h4>
           <ul className="footer-links">
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">FAQ</a></li>
@@ -30,27 +52,27 @@ const Footer = () => {
             <li><a href="#">Returns</a></li>
           </ul>
         </div>
-        
-        <div className="footer-section">
-          <h4>Connect With Us</h4>
-          <div className="footer-social">
-            <a href="#" className="social-link" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </a>
-            <a href="#" className="social-link" aria-label="Twitter">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-              </svg>
-            </a>
-            <a href="#" className="social-link" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
+
+        {/* Contact Info */}
+        <div className="footer-column">
+          <h4>Contact</h4>
+          <ul className="footer-links">
+            <li><a href="mailto:support@vexo.com">support@vexo.com</a></li>
+            <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+            <li><a href="#">Live Chat</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="footer-bottom">
+        <div className="footer-bottom-content">
+          <p>&copy; {new Date().getFullYear()} VEXO. All rights reserved.</p>
+          <div className="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
           </div>
         </div>
       </div>

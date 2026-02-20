@@ -24,15 +24,18 @@ function Navbar() {
 
   return (
     <nav className="navbar">
+      {/* Logo */}
       <div className="navbar-left">
-        <Link to="/" className="logo">Vexo</Link>
+        <Link to="/" className="logo">
+          <span className="v">V</span><span className="exo">EXO</span>
+        </Link>
       </div>
 
-      {/* SEARCH BAR */}
+      {/* Search Bar - Desktop */}
       <form onSubmit={handleSearch} className="search-bar">
         <input
           type="text"
-          placeholder="Search products..."
+          placeholder="Search for products..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
@@ -41,44 +44,19 @@ function Navbar() {
         </button>
       </form>
 
-      {/* FILTER & SORT - Desktop */}
-      <div className="filter-sort-container">
-        <div className="custom-select">
-          <select 
-            value={selectedCategory} 
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="all">All Categories</option>
-            {categories.map(cat => (
-              <option key={cat} value={cat}>
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="custom-select">
-          <select 
-            value={sortOption} 
-            onChange={(e) => setSortOption(e.target.value)}
-          >
-            <option value="">Sort By</option>
-            <option value="low">Price: Low → High</option>
-            <option value="high">Price: High → Low</option>
-          </select>
-        </div>
-      </div>
-
-      {/* NAVIGATION BUTTONS */}
+      {/* Nav Icons - Right */}
       <div className="nav-buttons">
-        <Link to="/wishlist" className="wishlist-btn-nav">
+        <Link to="/wishlist" className="nav-icon-btn" title="Wishlist">
           <i className="bi bi-heart"></i>
-          <span className="wishlist-count">{wishlist.length}</span>
+          {wishlist.length > 0 && <span className="count">{wishlist.length}</span>}
         </Link>
-        <Link to="/cart" className="cart-btn">
+        <Link to="/cart" className="nav-icon-btn" title="Cart">
           <i className="bi bi-cart3"></i>
-          <span className="cart-count">{cart.length}</span>
+          {cart.length > 0 && <span className="count">{cart.length}</span>}
         </Link>
+        <button className="nav-icon-btn" title="Profile">
+          <i className="bi bi-person"></i>
+        </button>
       </div>
 
       {/* Mobile Menu Toggle */}
@@ -88,7 +66,7 @@ function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
-        {/* Search Bar - Mobile */}
+        {/* Mobile Search */}
         <form onSubmit={handleSearch} className="search-bar">
           <input
             type="text"
@@ -101,43 +79,46 @@ function Navbar() {
           </button>
         </form>
 
+        {/* Mobile Filter Section */}
         <div className="mobile-filter-section">
-            <label>Category</label>
-            <select 
-              value={selectedCategory} 
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="all">All Categories</option>
-              {categories.map(cat => (
-                <option key={cat} value={cat}>
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mobile-filter-section">
-            <label>Sort By</label>
-            <select 
-              value={sortOption} 
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-              <option value="">Sort By</option>
-              <option value="low">Price: Low → High</option>
-              <option value="high">Price: High → Low</option>
-            </select>
-          </div>
-          <div className="mobile-nav-links">
-            <Link to="/wishlist" onClick={() => setMobileMenuOpen(false)}>
-              <i className="bi bi-heart"></i>
-              Wishlist ({wishlist.length})
-            </Link>
-            <Link to="/cart" onClick={() => setMobileMenuOpen(false)}>
-              <i className="bi bi-cart3"></i>
-              Cart ({cart.length})
-            </Link>
-          </div>
+          <label>Category</label>
+          <select 
+            value={selectedCategory} 
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="all">All Categories</option>
+            {categories.map(cat => (
+              <option key={cat} value={cat}>
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </option>
+            ))}
+          </select>
         </div>
-      </nav>
+        <div className="mobile-filter-section">
+          <label>Sort By</label>
+          <select 
+            value={sortOption} 
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="">Sort By</option>
+            <option value="low">Price: Low → High</option>
+            <option value="high">Price: High → Low</option>
+          </select>
+        </div>
+        
+        {/* Mobile Nav Links */}
+        <div className="mobile-nav-links">
+          <Link to="/wishlist" onClick={() => setMobileMenuOpen(false)}>
+            <i className="bi bi-heart"></i>
+            Wishlist ({wishlist.length})
+          </Link>
+          <Link to="/cart" onClick={() => setMobileMenuOpen(false)}>
+            <i className="bi bi-cart3"></i>
+            Cart ({cart.length})
+          </Link>
+        </div>
+      </div>
+    </nav>
   );
 }
 
