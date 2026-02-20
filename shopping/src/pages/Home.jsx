@@ -4,74 +4,72 @@ import ProductCard from "../components/ProducCard/ProductCard";
 import { CartContext } from "../context/CartContext";
 import "../components/css/index.css";
 
-
 function Home() {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [filter, setFilter] = useState("all");
-  const [sort, setSort] = useState("");
   const [loading, setLoading] = useState(true);
-  const { searchTerm } = useContext(CartContext);
+  const { searchTerm, selectedCategory, sortOption } = useContext(CartContext);
 
   useEffect(() => {
     setLoading(true);
-    // Fetch all products (FakeStoreAPI returns up to 20 products by default)
     axios.get("https://fakestoreapi.com/products?limit=20")
       .then(res => {
         setProducts(res.data);
         setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching products:", err);
+        setLoading(false);
       });
-
-    axios.get("https://fakestoreapi.com/products/categories")
-      .then(res => setCategories(res.data));
   }, []);
 
-  const filteredProducts =
-    filter === "all" ? products : products.filter(p => p.category === filter);
+  // Filter by category
+  const filteredProducts = selectedCategory === "all" 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
 
+  // Filter by search term
   const searchedProducts = filteredProducts.filter(p =>
     p.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Sort products
   const finalProducts = [...searchedProducts].sort((a, b) => {
-    if (sort === "low") return a.price - b.price;
-    if (sort === "high") return b.price - a.price;
+    if (sortOption === "low") return a.price - b.price;
+    if (sortOption === "high") return b.price - a.price;
     return 0;
   });
 
   return (
-    <>
-      <div className="home-container">
-
-        {/* Filter & Sort */}
-        <div className="filter-sort-bar">
-          <select onChange={(e) => setFilter(e.target.value)}>
-            <option value="all">All Categories</option>
-            {categories.map(cat => (
-              <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
-            ))}
-          </select>
-
-          <select onChange={(e) => setSort(e.target.value)}>
-            <option value="">Sort By</option>
-            <option value="low">Price: Low to High</option>
-            <option value="high">Price: High to Low</option>
-          </select>
+    <div className="home-container">
+      {/* Loading State */}
+      {loading && (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading products...</p>
         </div>
+      )}
 
-        {/* Loading State */}
-        {loading && <div className="loading">Loading products...</div>}
+      {/* Products Grid */}
+      {!loading && finalProducts.length === 0 && (
+        <div className="no-products">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+            <path d="M8 8l6 6M14 8l-6 6"/>
+          </svg>
+          <h3>No products found</h3>
+          <p>Try adjusting your search or filter</p>
+        </div>
+      )}
 
-        {/* Products */}
+      {!loading && finalProducts.length > 0 && (
         <div className="products-grid">
-          {!loading && finalProducts.length === 0 && <h3 className="no-products">No products found</h3>}
-          {!loading && finalProducts.map(product => (
+          {finalProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-
-      </div>
-    </>
+      )}
+    </div>
   );
 }
 
