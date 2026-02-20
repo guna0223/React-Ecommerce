@@ -1,7 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../components/css/Cart.css";
+
+// Convert USD to INR
+const convertToINR = (usdPrice) => {
+  return Math.round(usdPrice * 83);
+};
 
 function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
@@ -12,13 +18,9 @@ function Cart() {
 
       {cart.length === 0 && (
         <div className="empty-cart">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-          </svg>
+          <i className="bi bi-cart-x"></i>
           <h3>Your cart is empty</h3>
-          <p>Discover our premium collection</p>
+          <p>Add some products to get started</p>
           <Link to="/" className="back-btn">Start Shopping</Link>
         </div>
       )}
@@ -28,12 +30,12 @@ function Cart() {
           <div key={item.id} className="cart-card">
             <img src={item.image} alt={item.title} />
             <h3>{item.title}</h3>
-            <p className="cart-price">${item.price.toFixed(2)}</p>
+            <p className="cart-price">₹{convertToINR(item.price).toLocaleString('en-IN')}</p>
             <button
               onClick={() => removeFromCart(item.id)}
               className="remove-btn"
             >
-              Remove
+              <i className="bi bi-trash3"></i> Remove
             </button>
           </div>
         ))}

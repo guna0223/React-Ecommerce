@@ -3,7 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "../components/ProducCard/ProductCard";
 import { CartContext } from "../context/CartContext";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../components/Css/ProductDetails.css";
+
+// Convert USD to INR
+const convertToINR = (usdPrice) => {
+  return Math.round(usdPrice * 83);
+};
 
 function ProductDetails() {
     const { id } = useParams();
@@ -83,15 +89,16 @@ function ProductDetails() {
                     <div className="details-rating">
                         <div className="stars">
                             {[...Array(5)].map((_, i) => (
-                                <svg key={i} viewBox="0 0 24 24" fill={i < Math.floor(rating) ? "#D4AF37" : "none"} stroke="#D4AF37" strokeWidth="2">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
+                                <i 
+                                    key={i} 
+                                    className={`bi ${i < Math.floor(rating) ? 'bi-star-fill' : 'bi-star'}`}
+                                ></i>
                             ))}
                         </div>
                         <span>{rating} ({reviewCount} reviews)</span>
                     </div>
 
-                    <p className="price">${product.price.toFixed(2)}</p>
+                    <p className="price">₹{convertToINR(product.price).toLocaleString('en-IN')}</p>
                     <p className="description">{product.description}</p>
                     
                     <div className="details-buttons">
@@ -99,20 +106,14 @@ function ProductDetails() {
                             onClick={() => addToCart(product)} 
                             className="add-btn"
                         >
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="9" cy="21" r="1"/>
-                                <circle cx="20" cy="21" r="1"/>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                            </svg>
+                            <i className="bi bi-cart3"></i>
                             Add to Cart
                         </button>
                         <button 
                             onClick={handleWishlistClick} 
                             className={`wishlist-btn-details ${inWishlist ? 'active' : ''}`}
                         >
-                            <svg viewBox="0 0 24 24" fill={inWishlist ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            </svg>
+                            <i className={`bi ${inWishlist ? 'bi-heart-fill' : 'bi-heart'}`}></i>
                             {inWishlist ? 'In Wishlist' : 'Add to Wishlist'}
                         </button>
                     </div>

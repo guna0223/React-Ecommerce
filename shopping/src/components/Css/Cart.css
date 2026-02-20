@@ -55,12 +55,16 @@
   box-shadow: var(--shadow-sm);
 }
 
-.empty-cart svg {
-  width: 80px;
-  height: 80px;
+.empty-cart i {
+  font-size: 60px;
   color: var(--navy);
   margin-bottom: 20px;
   opacity: 0.4;
+}
+
+.empty-cart svg {
+  width: 80px;
+  height: 80px;
 }
 
 .empty-cart h3 {
@@ -147,6 +151,10 @@
 }
 
 /* Remove Button */
+.remove-btn i {
+  margin-right: 6px;
+}
+
 .remove-btn {
   width: 100%;
   background: var(--navy);

@@ -102,14 +102,10 @@
   margin-bottom: 20px;
 }
 
-.details-rating .stars {
-  display: flex;
-}
-
-.details-rating svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--gold);
+.details-rating .stars i {
+  font-size: 18px;
+  color: var(--gold);
+  margin-right: 2px;
 }
 
 .details-rating span {
@@ -148,9 +144,8 @@
   transform: translateY(-2px);
 }
 
-.product-details .add-btn svg {
-  width: 20px;
-  height: 20px;
+.product-details .add-btn i {
+  font-size: 18px;
 }
 
 .wishlist-btn-details {
@@ -183,9 +178,8 @@
   color: var(--navy);
 }
 
-.wishlist-btn-details svg {
-  width: 18px;
-  height: 18px;
+.wishlist-btn-details i {
+  font-size: 18px;
 }
 
 /* Recommended */

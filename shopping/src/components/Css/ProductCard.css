@@ -106,14 +106,12 @@
   100% { transform: scale(1); }
 }
 
-.wishlist-btn svg {
-  width: 20px;
-  height: 20px;
-  color: var(--gray-medium);
-}
-
 .wishlist-btn.active svg {
   color: var(--navy);
+}
+
+.wishlist-btn i {
+  font-size: 18px;
 }
 
 /* Card Content */
@@ -170,11 +168,9 @@
   gap: 2px;
 }
 
-.stars svg {
-  width: 14px;
-  height: 14px;
-  fill: var(--gold);
-  stroke: var(--gold);
+.stars i {
+  font-size: 14px;
+  color: var(--gold);
 }
 
 .rating-count {

@@ -87,6 +87,10 @@
   color: var(--gray-light);
 }
 
+.search-btn i {
+  font-size: 16px;
+}
+
 .search-btn {
   background: var(--gold);
   border: none;

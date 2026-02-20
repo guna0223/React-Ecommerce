@@ -1,7 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
-import "../Css/ProductCard.css"
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "../Css/ProductCard.css";
+
+// Convert USD to INR (approx rate: 1 USD = 83 INR)
+const convertToINR = (usdPrice) => {
+  return Math.round(usdPrice * 83);
+};
 
 function ProductCard({ product }) {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useContext(CartContext);
@@ -33,15 +39,7 @@ function ProductCard({ product }) {
           onClick={handleWishlistClick}
           title={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
         >
-          {inWishlist ? (
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-          )}
+          <i className={`bi ${inWishlist ? 'bi-heart-fill' : 'bi-heart'}`}></i>
         </button>
         <Link to={`/product/${product.id}`}>
           <img src={product.image} alt={product.title} />
@@ -58,22 +56,19 @@ function ProductCard({ product }) {
         <div className="product-rating">
           <div className="stars">
             {[...Array(5)].map((_, i) => (
-              <svg key={i} viewBox="0 0 24 24" fill={i < Math.floor(rating) ? "#fbbf24" : "none"} stroke="#fbbf24" strokeWidth="2">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
+              <i 
+                key={i} 
+                className={`bi ${i < Math.floor(rating) ? 'bi-star-fill' : 'bi-star'}`}
+              ></i>
             ))}
           </div>
           <span className="rating-count">({reviewCount})</span>
         </div>
 
-        <p className="product-price">{product.price.toFixed(2)}</p>
+        <p className="product-price">₹{convertToINR(product.price).toLocaleString('en-IN')}</p>
 
         <button onClick={handleCartClick} className="add-to-cart-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-          </svg>
+          <i className="bi bi-cart3"></i>
           Add to Cart
         </button>
       </div>
