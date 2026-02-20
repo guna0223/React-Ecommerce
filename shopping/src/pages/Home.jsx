@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import ProductCard from "../components/ProducCard/ProductCard";
 import { CartContext } from "../context/CartContext";
 import { getAllProducts } from "../service/api";
-import "../components/css/index.css";
 
 function Home() {
   const [products, setProducts] = useState([]);
