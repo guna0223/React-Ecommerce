@@ -102,9 +102,13 @@
   margin-bottom: 20px;
 }
 
+.details-rating .stars {
+  display: flex;
+}
+
 .details-rating .stars i {
-  font-size: 18px;
-  color: var(--gold);
+  font-size: 18px !important;
+  color: var(--gold) !important;
   margin-right: 2px;
 }
 

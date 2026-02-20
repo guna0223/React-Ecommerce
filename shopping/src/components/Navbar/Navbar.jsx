@@ -43,8 +43,8 @@ function Navbar() {
       {/* FILTER & SORT - Desktop */}
       <div className="filter-sort-container">
         <div className="custom-select">
-          <select 
-            value={selectedCategory} 
+          <select
+            value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
             <option value="all">All Categories</option>
@@ -57,8 +57,8 @@ function Navbar() {
         </div>
 
         <div className="custom-select">
-          <select 
-            value={sortOption} 
+          <select
+            value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
           >
             <option value="">Sort By</option>
@@ -71,7 +71,7 @@ function Navbar() {
       {/* NAVIGATION BUTTONS */}
       <div className="nav-buttons">
         <Link to="/wishlist" className="wishlist-btn-nav">
-          <i className="bi bi-heart"></i>
+          <i className="bi bi-suit-heart-fill"></i>
           <span className="wishlist-count">{wishlist.length}</span>
         </Link>
         <Link to="/cart" className="cart-btn">
@@ -90,8 +90,8 @@ function Navbar() {
         <div className="mobile-menu">
           <div className="mobile-filter-section">
             <label>Category</label>
-            <select 
-              value={selectedCategory} 
+            <select
+              value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               <option value="all">All Categories</option>
@@ -104,8 +104,8 @@ function Navbar() {
           </div>
           <div className="mobile-filter-section">
             <label>Sort By</label>
-            <select 
-              value={sortOption} 
+            <select
+              value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
             >
               <option value="">Sort By</option>
