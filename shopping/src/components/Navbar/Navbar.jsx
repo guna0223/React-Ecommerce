@@ -23,14 +23,14 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <Link to="/" className="logo">ShopNest</Link>
+        <Link to="/" className="logo">SHOP<span>NEST</span></Link>
       </div>
 
       {/* SEARCH BAR */}
       <form onSubmit={handleSearch} className="search-bar">
         <input
           type="text"
-          placeholder="Search products..."
+          placeholder="Search luxury products..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
@@ -48,7 +48,6 @@ function Navbar() {
           <select 
             value={selectedCategory} 
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="category-select"
           >
             <option value="all">All Categories</option>
             {categories.map(cat => (
@@ -63,7 +62,6 @@ function Navbar() {
           <select 
             value={sortOption} 
             onChange={(e) => setSortOption(e.target.value)}
-            className="sort-select"
           >
             <option value="">Sort By</option>
             <option value="low">Price: Low → High</option>
@@ -75,13 +73,13 @@ function Navbar() {
       {/* NAVIGATION BUTTONS */}
       <div className="nav-buttons">
         <Link to="/wishlist" className="wishlist-btn-nav">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
           <span className="wishlist-count">{wishlist.length}</span>
         </Link>
         <Link to="/cart" className="cart-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="9" cy="21" r="1"/>
             <circle cx="20" cy="21" r="1"/>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -131,13 +129,13 @@ function Navbar() {
           </div>
           <div className="mobile-nav-links">
             <Link to="/wishlist" onClick={() => setMobileMenuOpen(false)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
               </svg>
               Wishlist ({wishlist.length})
             </Link>
             <Link to="/cart" onClick={() => setMobileMenuOpen(false)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="9" cy="21" r="1"/>
                 <circle cx="20" cy="21" r="1"/>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>

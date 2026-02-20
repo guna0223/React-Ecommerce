@@ -14,6 +14,7 @@ function ProductDetails() {
 
     useEffect(() => {
         setLoading(true);
+        window.scrollTo(0, 0);
         axios.get(`https://fakestoreapi.com/products/${id}`)
             .then(res => {
                 setProduct(res.data);
@@ -38,7 +39,7 @@ function ProductDetails() {
             <div className="details-container">
                 <div className="loading-container">
                     <div className="loading-spinner"></div>
-                    <p>Loading product...</p>
+                    <p>Loading...</p>
                 </div>
             </div>
         );
@@ -82,7 +83,7 @@ function ProductDetails() {
                     <div className="details-rating">
                         <div className="stars">
                             {[...Array(5)].map((_, i) => (
-                                <svg key={i} viewBox="0 0 24 24" fill={i < Math.floor(rating) ? "#fbbf24" : "none"} stroke="#fbbf24" strokeWidth="2">
+                                <svg key={i} viewBox="0 0 24 24" fill={i < Math.floor(rating) ? "#D4AF37" : "none"} stroke="#D4AF37" strokeWidth="2">
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                                 </svg>
                             ))}
@@ -121,7 +122,7 @@ function ProductDetails() {
             {/* Recommended */}
             {recommended.length > 0 && (
                 <div className="recommended-section">
-                    <h2 className="sub-heading">You May Also Like</h2>
+                    <h2 className="sub-heading">You May <span>Also Like</span></h2>
                     <div className="recommended-grid">
                         {recommended.map(P => (
                             <ProductCard key={P.id} product={P} />

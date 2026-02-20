@@ -9,7 +9,7 @@ function Wishlist() {
 
   return (
     <div className="cart-container">
-      <h2 className="cart-title">Your Wishlist</h2>
+      <h2 className="cart-title">Your <span>Wishlist</span></h2>
 
       {wishlist.length === 0 && (
         <div className="empty-cart">
@@ -17,8 +17,8 @@ function Wishlist() {
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
           <h3>Your wishlist is empty</h3>
-          <p>Save your favorite items for later</p>
-          <Link to="/" className="back-btn">Explore Products</Link>
+          <p>Save your favorite premium items</p>
+          <Link to="/" className="back-btn">Explore Collection</Link>
         </div>
       )}
 

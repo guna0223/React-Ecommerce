@@ -1,22 +1,22 @@
-/* Global Styles & Variables */
+/* Classic Blue & White Theme - Trust & Professional */
 :root {
-  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-  --primary-color: #6366f1;
-  --secondary-color: #8b5cf6;
-  --accent-color: #d946ef;
-  --bg-light: #f8fafc;
-  --bg-page: #f1f5f9;
-  --text-dark: #1e293b;
-  --text-light: #64748b;
-  --text-muted: #94a3b8;
-  --white: #ffffff;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 20px rgba(99, 102, 241, 0.12);
-  --shadow-lg: 0 10px 40px rgba(99, 102, 241, 0.15);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --navy: #001F3F;
+  --navy-light: #0a2d5a;
+  --navy-dark: #000d1a;
+  --gold: #FFD700;
+  --gold-light: #FFE44D;
+  --gold-dark: #E6C200;
+  --white: #FFFFFF;
+  --white-off: #F5F5F5;
+  --gray-dark: #333333;
+  --gray-medium: #666666;
+  --gray-light: #999999;
+  --shadow-sm: 0 2px 8px rgba(0, 31, 63, 0.1);
+  --shadow-md: 0 8px 30px rgba(0, 31, 63, 0.15);
+  --shadow-lg: 0 15px 50px rgba(0, 31, 63, 0.2);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -27,33 +27,19 @@
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Poppins", sans-serif;
-  background: var(--bg-page);
-  color: var(--text-dark);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--white-off);
+  color: var(--navy);
   min-height: 100vh;
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Main container */
 .home-container {
-  padding: 32px;
+  padding: 40px;
   min-height: calc(100vh - 80px);
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
-  animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Loading State */
@@ -62,74 +48,80 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
+  min-height: 60vh;
   gap: 20px;
 }
 
 .loading-spinner {
-  width: 48px;
-  height: 48px;
-  border: 4px solid var(--bg-light);
-  border-top-color: var(--primary-color);
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--white-off);
+  border-top-color: var(--navy);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 .loading-container p {
-  color: var(--text-light);
-  font-size: 15px;
+  color: var(--navy);
+  font-size: 14px;
   font-weight: 500;
+  letter-spacing: 1px;
 }
 
-/* No Products Found */
+/* No Products */
 .no-products {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
+  min-height: 60vh;
   text-align: center;
   gap: 16px;
-  color: var(--text-light);
 }
 
 .no-products svg {
-  color: var(--text-muted);
+  color: var(--navy);
+  opacity: 0.5;
 }
 
 .no-products h3 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--navy);
 }
 
 .no-products p {
-  font-size: 15px;
+  font-size: 14px;
+  color: var(--gray-medium);
 }
 
-/* Products Grid */
+/* Products Grid - 4 Columns on Big Screen */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-  padding: 8px 0;
+  gap: 30px;
+  padding: 20px 0;
 }
 
-/* Responsive Grid */
-@media screen and (max-width: 1300px) {
+/* Responsive - 4 cards on big screen */
+@media screen and (max-width: 1400px) {
   .products-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -154,27 +146,25 @@ body {
   }
 }
 
-/* Scrollbar Styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
-  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-light);
+  background: var(--white-off);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
+  background: var(--navy);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-light);
+  background: var(--navy-light);
 }
 
-/* Selection */
 ::selection {
-  background: var(--primary-color);
-  color: white;
+  background: var(--gold);
+  color: var(--navy);
 }
