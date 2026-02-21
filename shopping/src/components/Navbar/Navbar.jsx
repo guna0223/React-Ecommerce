@@ -54,9 +54,6 @@ function Navbar() {
           <i className="bi bi-cart3"></i>
           {cart.length > 0 && <span className="count">{cart.length}</span>}
         </Link>
-        <button className="nav-icon-btn" title="Profile">
-          <i className="bi bi-person"></i>
-        </button>
       </div>
 
       {/* Mobile Menu Toggle */}
