@@ -7,31 +7,29 @@ import { getProductById, getAllProducts } from "../service/api";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../components/Css/ProductDetails.css";
-
-// Convert USD to INR
-const convertToINR = (usdPrice) => {
-  return Math.round(usdPrice * 83);
-};
+import { convertToINR, formatINR } from "../utils/currency";
 
 function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [recommended, setRecommended] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [qty, setQty] = useState(1);
     const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useContext(CartContext);
 
-    useEffect(() => {
+    const fetchData = () => {
         setLoading(true);
+        setError(null);
         window.scrollTo(0, 0);
+        setQty(1);
         
-        // Get product by ID
         getProductById(id)
             .then(data => {
                 setProduct(data);
                 return data.category;
             })
             .then(category => {
-                // Get all products and filter by category
                 getAllProducts()
                     .then(allProducts => {
                         const rec = allProducts.filter(p => p.category === category && p.id != id);
@@ -41,16 +39,36 @@ function ProductDetails() {
             })
             .catch(err => {
                 console.error("Error:", err);
+                setError(err.message || "Failed to load product");
                 setLoading(false);
             });
+    }
+
+    useEffect(() => {
+        fetchData();
     }, [id]);
 
     if (loading) {
         return (
-            <div className="details-container">
-                <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <p>Loading...</p>
+            <div className="details-container text-center py-5">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+                <p className="mt-3">Loading...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="details-container text-center py-5">
+                <div className="card mx-auto shadow-sm" style={{ maxWidth: '400px' }}>
+                    <div className="card-body">
+                        <i className="bi bi-exclamation-triangle text-danger" style={{ fontSize: '3rem' }}></i>
+                        <h4 className="mt-3">Oops!</h4>
+                        <p className="text-muted">{error}</p>
+                        <button onClick={fetchData} className="btn btn-primary mt-2">Retry</button>
+                    </div>
                 </div>
             </div>
         );
@@ -59,9 +77,9 @@ function ProductDetails() {
     if (!product) {
         return (
             <div className="details-container">
-                <div className="no-products">
+                <div className="no-products text-center py-5">
                     <h3>Product not found</h3>
-                    <Link to="/" className="back-btn">Back to Home</Link>
+                    <Link to="/" className="btn btn-primary mt-3">Back to Home</Link>
                 </div>
             </div>
         );
@@ -77,9 +95,31 @@ function ProductDetails() {
         }
     };
 
-    // Generate random rating for demo
-    const rating = (3.5 + Math.random() * 1.5).toFixed(1);
-    const reviewCount = Math.floor(100 + Math.random() * 300);
+    // Ratings from API
+    const rating = product.rating?.rate || 0;
+    const reviewCount = product.rating?.count || 0;
+
+    // Render stars
+    const renderStars = () => {
+        const stars = [];
+        for (let i = 1; i <= 5; i++) {
+        if (rating >= i) {
+            stars.push(<i key={i} className="bi bi-star-fill text-warning"></i>);
+        } else if (rating >= i - 0.5) {
+            stars.push(<i key={i} className="bi bi-star-half text-warning"></i>);
+        } else {
+            stars.push(<i key={i} className="bi bi-star text-warning"></i>);
+        }
+        }
+        return stars;
+    };
+
+    const handleQtyChange = (delta) => {
+        const newQty = qty + delta;
+        if (newQty >= 1 && newQty <= 10) {
+            setQty(newQty);
+        }
+    };
 
     return (
         <section className="details-container">
@@ -91,27 +131,43 @@ function ProductDetails() {
                     <span className="category">{product.category}</span>
                     <h1>{product.title}</h1>
                     
-                    <div className="details-rating">
-                        <span className="rating-badge">{rating} <i className="bi bi-star-fill"></i></span>
-                        <span>({reviewCount} reviews)</span>
+                    <div className="details-rating d-flex align-items-center gap-2 mb-3">
+                        <span className="rating-badge fw-bold px-2 py-1 bg-light rounded text-dark">{rating.toFixed(1)}</span>
+                        <span className="d-flex align-items-center gap-1 fs-6">
+                            {renderStars()}
+                        </span>
+                        <span className="rating-count text-muted ms-1">({reviewCount} reviews)</span>
                     </div>
 
-                    <p className="price">₹{convertToINR(product.price).toLocaleString('en-IN')}</p>
+                    <p className="price text-success fw-bold fs-3">{formatINR(convertToINR(product.price))}</p>
                     <p className="description">{product.description}</p>
                     
-                    <div className="details-buttons">
+                    <div className="d-flex align-items-center gap-3 mb-4 mt-3">
+                        <span className="fw-bold">Quantity:</span>
+                        <div className="btn-group" role="group">
+                            <button onClick={() => handleQtyChange(-1)} className="btn btn-outline-secondary" disabled={qty <= 1}>
+                                <i className="bi bi-dash"></i>
+                            </button>
+                            <span className="btn btn-outline-secondary disabled text-dark fw-bold" style={{ width: '50px' }}>{qty}</span>
+                            <button onClick={() => handleQtyChange(1)} className="btn btn-outline-secondary" disabled={qty >= 10}>
+                                <i className="bi bi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="details-buttons d-flex gap-3">
                         <button 
-                            onClick={() => addToCart(product)} 
-                            className="add-btn"
+                            onClick={() => addToCart({ ...product, quantity: qty })} 
+                            className="add-btn btn btn-primary px-4 py-2"
                         >
-                            <i className="bi bi-cart3"></i>
+                            <i className="bi bi-cart3 me-2"></i>
                             Add to Cart
                         </button>
                         <button 
                             onClick={handleWishlistClick} 
-                            className={`wishlist-btn-details ${inWishlist ? 'active' : ''}`}
+                            className={`wishlist-btn-details btn ${inWishlist ? 'btn-danger' : 'btn-outline-secondary'} px-4 py-2`}
                         >
-                            <i className={`bi ${inWishlist ? 'bi-heart-fill' : 'bi-heart'}`}></i>
+                            <i className={`bi ${inWishlist ? 'bi-heart-fill' : 'bi-heart'} me-2`}></i>
                             {inWishlist ? 'In Wishlist' : 'Add to Wishlist'}
                         </button>
                     </div>
@@ -120,9 +176,9 @@ function ProductDetails() {
 
             {/* Recommended */}
             {recommended.length > 0 && (
-                <div className="recommended-section">
-                    <h2 className="sub-heading">You May <span>Also Like</span></h2>
-                    <div className="recommended-grid">
+                <div className="recommended-section mt-5">
+                    <h2 className="sub-heading mb-4">You May <span>Also Like</span></h2>
+                    <div className="recommended-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
                         {recommended.map(P => (
                             <ProductCard key={P.id} product={P} />
                         ))}

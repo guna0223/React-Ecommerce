@@ -1,47 +1,56 @@
 import axios from "axios";
 
-const API_URL = "https://fakestoreapi.com";
+const apiClient = axios.create({
+  baseURL: "https://fakestoreapi.com",
+  timeout: 10000,
+});
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error("API Error:", error);
+    throw error;
+  }
+);
 
 // Get all products
 export const getAllProducts = async (limit = 20) => {
-  try {
-    const response = await axios.get(`${API_URL}/products?limit=${limit}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching all products:", error);
-    throw error;
-  }
+  const response = await apiClient.get(`/products?limit=${limit}`);
+  return response.data;
 };
 
 // Get product by ID
 export const getProductById = async (id) => {
-  try {
-    const response = await axios.get(`${API_URL}/products/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching product by ID:", error);
-    throw error;
-  }
+  const response = await apiClient.get(`/products/${id}`);
+  return response.data;
 };
 
 // Get all categories
 export const getAllCategories = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/products/categories`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    throw error;
-  }
+  const response = await apiClient.get(`/products/categories`);
+  return response.data;
 };
 
 // Get products by category
 export const getProductsByCategory = async (category) => {
-  try {
-    const response = await axios.get(`${API_URL}/products/category/${category}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching products by category:", error);
-    throw error;
-  }
+  const response = await apiClient.get(`/products/category/${category}`);
+  return response.data;
+};
+
+// Sort products
+export const getSortedProducts = async (sort = 'asc') => {
+  const response = await apiClient.get(`/products?sort=${sort}`);
+  return response.data;
+};
+
+// Get limited products
+export const getLimitedProducts = async (limit = 10) => {
+  const response = await apiClient.get(`/products?limit=${limit}`);
+  return response.data;
+};
+
+// Get single category with sort
+export const getCategorySorted = async (category, sort = 'asc') => {
+  const response = await apiClient.get(`/products/category/${category}?sort=${sort}`);
+  return response.data;
 };
