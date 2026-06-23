@@ -68,22 +68,19 @@ function ProductCard({ product }) {
         </Link>
 
         <div className="product-rating d-flex align-items-center gap-2 mb-2">
-          <span className="rating-badge fw-bold px-2 py-1 bg-light rounded text-dark">{rating.toFixed(1)}</span>
-          <span className="d-flex align-items-center gap-1 fs-6">
-            {renderStars()}
-          </span>
-          <span className="rating-count text-muted ms-1">({reviewCount})</span>
+          <span className="rating-badge px-2 py-1">{rating.toFixed(1)} <i className="bi bi-star-fill"></i></span>
+          <span className="rating-count">({reviewCount})</span>
         </div>
 
-        <p className="product-price fw-bold text-success fs-5">{formatINR(convertToINR(product.price))}</p>
+        <p className="product-price">{formatINR(convertToINR(product.price))}</p>
 
         {inCart ? (
-          <button onClick={() => navigate('/cart')} className="add-to-cart-btn btn btn-success w-100" style={{ backgroundColor: '#198754', borderColor: '#198754', color: 'white' }}>
+          <button onClick={() => navigate('/cart')} className="btn-gradient w-100 mt-2 d-flex justify-content-center align-items-center">
             <i className="bi bi-cart-check me-2"></i>
             Go to Cart
           </button>
         ) : (
-          <button onClick={handleCartClick} className="add-to-cart-btn btn btn-primary w-100">
+          <button onClick={handleCartClick} className="btn-gradient w-100 mt-2 d-flex justify-content-center align-items-center">
             <i className="bi bi-cart3 me-2"></i>
             Add to Cart
           </button>

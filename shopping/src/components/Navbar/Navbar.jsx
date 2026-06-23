@@ -27,55 +27,20 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      {/* Logo */}
-      <div className="navbar-left">
-        <Link to="/" className="logo">
-          <span className="v">V</span><span className="exo">EXO</span>
-        </Link>
-      </div>
+    <div className="navbar-wrapper">
+      <nav className="navbar">
+        {/* Logo */}
+        <div className="navbar-left">
+          <Link to="/" className="logo">
+            <span className="v">V</span><span className="exo">EXO</span>
+          </Link>
+        </div>
 
-      {/* Search Bar - Desktop */}
-      <form onSubmit={handleSearch} className="search-bar">
-        <input
-          type="text"
-          placeholder="Search for products..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit" className="search-btn">
-          <i className="bi bi-search"></i>
-        </button>
-      </form>
-
-      {/* Nav Icons - Right */}
-      <div className="nav-buttons">
-        <Link to="/orders" className="nav-icon-btn" title="Orders">
-          <i className="bi bi-bag-check"></i>
-          {ordersCount > 0 && <span className="count">{ordersCount}</span>}
-        </Link>
-        <Link to="/wishlist" className="nav-icon-btn" title="Wishlist">
-          <i className="bi bi-heart"></i>
-          {wishlist.length > 0 && <span className="count">{wishlist.length}</span>}
-        </Link>
-        <Link to="/cart" className="nav-icon-btn" title="Cart">
-          <i className="bi bi-cart3"></i>
-          {cartCount > 0 && <span className="count">{cartCount}</span>}
-        </Link> 
-      </div>
-
-      {/* Mobile Menu Toggle */}
-      <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-        <i className={`bi ${mobileMenuOpen ? 'bi-x-lg' : 'bi-list'}`}></i>
-      </button>
-
-      {/* Mobile Menu Dropdown */}
-      <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
-        {/* Mobile Search */}
+        {/* Search Bar - Desktop */}
         <form onSubmit={handleSearch} className="search-bar">
           <input
             type="text"
-            placeholder="Search products..."
+            placeholder="Search for products..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
@@ -84,50 +49,87 @@ function Navbar() {
           </button>
         </form>
 
-        {/* Mobile Filter Section */}
-        <div className="mobile-filter-section">
-          <label>Category</label>
-          <select 
-            value={selectedCategory} 
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="all">All Categories</option>
-            {categories.map(cat => (
-              <option key={cat} value={cat}>
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mobile-filter-section">
-          <label>Sort By</label>
-          <select 
-            value={sortOption} 
-            onChange={(e) => setSortOption(e.target.value)}
-          >
-            <option value="">Sort By</option>
-            <option value="low">Price: Low → High</option>
-            <option value="high">Price: High → Low</option>
-          </select>
-        </div>
-        
-        {/* Mobile Nav Links */}
-        <div className="mobile-nav-links">
-          <Link to="/orders" onClick={() => setMobileMenuOpen(false)}>
+        {/* Nav Icons - Right */}
+        <div className="nav-buttons">
+          <Link to="/orders" className="nav-icon-btn" title="Orders">
             <i className="bi bi-bag-check"></i>
-            Orders ({ordersCount})
+            {ordersCount > 0 && <span className="count">{ordersCount}</span>}
           </Link>
-          <Link to="/wishlist" onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/wishlist" className="nav-icon-btn" title="Wishlist">
             <i className="bi bi-heart"></i>
-            Wishlist ({wishlist.length})
+            {wishlist.length > 0 && <span className="count">{wishlist.length}</span>}
           </Link>
-          <Link to="/cart" onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/cart" className="nav-icon-btn" title="Cart">
             <i className="bi bi-cart3"></i>
-            Cart ({cartCount})
-          </Link>
+            {cartCount > 0 && <span className="count">{cartCount}</span>}
+          </Link> 
         </div>
-      </div>
-    </nav>
+
+        {/* Mobile Menu Toggle */}
+        <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <i className={`bi ${mobileMenuOpen ? 'bi-x-lg' : 'bi-list'}`}></i>
+        </button>
+
+        {/* Mobile Menu Dropdown */}
+        <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
+          {/* Mobile Search */}
+          <form onSubmit={handleSearch} className="search-bar">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <button type="submit" className="search-btn">
+              <i className="bi bi-search"></i>
+            </button>
+          </form>
+
+          {/* Mobile Filter Section */}
+          <div className="mobile-filter-section">
+            <label>Category</label>
+            <select 
+              value={selectedCategory} 
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="all">All Categories</option>
+              {categories.map(cat => (
+                <option key={cat} value={cat}>
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mobile-filter-section">
+            <label>Sort By</label>
+            <select 
+              value={sortOption} 
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="">Sort By</option>
+              <option value="low">Price: Low → High</option>
+              <option value="high">Price: High → Low</option>
+            </select>
+          </div>
+          
+          {/* Mobile Nav Links */}
+          <div className="mobile-nav-links">
+            <Link to="/orders" onClick={() => setMobileMenuOpen(false)}>
+              <i className="bi bi-bag-check"></i>
+              Orders ({ordersCount})
+            </Link>
+            <Link to="/wishlist" onClick={() => setMobileMenuOpen(false)}>
+              <i className="bi bi-heart"></i>
+              Wishlist ({wishlist.length})
+            </Link>
+            <Link to="/cart" onClick={() => setMobileMenuOpen(false)}>
+              <i className="bi bi-cart3"></i>
+              Cart ({cartCount})
+            </Link>
+          </div>
+        </div>
+      </nav>
+    </div>
   );
 }
 

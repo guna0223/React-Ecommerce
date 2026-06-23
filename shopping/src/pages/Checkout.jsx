@@ -98,7 +98,7 @@ function Checkout() {
     return (
       <div className="checkout-container text-center mt-5">
         <h3>Your cart is empty</h3>
-        <button onClick={() => navigate("/")} className="btn btn-primary mt-3">Continue Shopping</button>
+        <button onClick={() => navigate("/")} className="btn-gradient mt-3">Continue Shopping</button>
       </div>
     );
   }
@@ -111,7 +111,7 @@ function Checkout() {
           <h2>Order Placed Successfully!</h2>
           <p className="fs-5 mt-3">Order ID: <strong>{orderData?.orderId}</strong></p>
           <p className="text-muted">Estimated Delivery: {orderData?.estimatedDelivery}</p>
-          <button onClick={() => navigate("/")} className="btn btn-success mt-4 py-2 px-4">
+          <button onClick={() => navigate("/")} className="btn-gradient mt-4 py-2 px-4">
             Continue Shopping
           </button>
         </div>
@@ -183,7 +183,7 @@ function Checkout() {
               </div>
             </div>
             <div className="d-flex justify-content-end mt-4">
-              <button onClick={nextStep} className="btn btn-primary px-4 py-2">Next Step <i className="bi bi-arrow-right"></i></button>
+              <button onClick={nextStep} className="btn-gradient px-4 py-2">Next Step <i className="bi bi-arrow-right"></i></button>
             </div>
           </div>
         )}
@@ -247,7 +247,7 @@ function Checkout() {
             </div>
             <div className="d-flex justify-content-between mt-4">
               <button onClick={prevStep} className="btn btn-outline-secondary px-4 py-2"><i className="bi bi-arrow-left"></i> Back</button>
-              <button onClick={nextStep} className="btn btn-primary px-4 py-2">Review Order <i className="bi bi-arrow-right"></i></button>
+              <button onClick={nextStep} className="btn-gradient px-4 py-2">Review Order <i className="bi bi-arrow-right"></i></button>
             </div>
           </div>
         )}
@@ -301,7 +301,7 @@ function Checkout() {
                     <span>Grand Total:</span>
                     <span>{formatINR(grandTotal)}</span>
                   </div>
-                  <button onClick={placeOrder} className="btn btn-success place-order-btn">
+                  <button onClick={placeOrder} className="place-order-btn">
                     Place Order
                   </button>
                   <button onClick={prevStep} className="btn btn-link w-100 mt-2 text-muted text-decoration-none">

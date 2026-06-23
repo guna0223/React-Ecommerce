@@ -38,29 +38,29 @@ function Cart() {
           <Link to="/" className="back-btn">Start Shopping</Link>
         </div>
       ) : (
-        <div className="cart-content d-flex flex-column flex-lg-row gap-4">
-          <div className="cart-items flex-grow-1">
+        <div className="cart-content">
+          <div className="cart-items">
             {cart.map(item => (
-              <div key={item.id} className="cart-card d-flex flex-column flex-md-row gap-3 align-items-center mb-3 p-3 border rounded shadow-sm">
-                <img src={item.image} alt={item.title} style={{ width: '100px', objectFit: 'contain' }} />
-                <div className="cart-item-details flex-grow-1">
+              <div key={item.id} className="cart-card">
+                <img src={item.image} alt={item.title} />
+                <div className="cart-item-details">
                   <h5>{item.title}</h5>
-                  <p className="cart-price fw-bold text-success mb-2">{formatINR(convertToINR(item.price))}</p>
+                  <p className="cart-price">{formatINR(convertToINR(item.price))}</p>
                   
                   <div className="d-flex align-items-center gap-3 mb-2">
-                    <div className="qty-controls btn-group" role="group">
-                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="btn btn-outline-secondary btn-sm"><i className="bi bi-dash"></i></button>
-                      <span className="btn btn-outline-secondary btn-sm disabled text-dark">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="btn btn-outline-secondary btn-sm"><i className="bi bi-plus"></i></button>
+                    <div className="qty-selector">
+                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="qty-btn" disabled={item.quantity <= 1}><i className="bi bi-dash"></i></button>
+                      <span className="qty-display">{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="qty-btn"><i className="bi bi-plus"></i></button>
                     </div>
                     <p className="cart-subtotal mb-0 text-muted">Subtotal: {formatINR(convertToINR(item.price) * item.quantity)}</p>
                   </div>
                   
                   <div className="cart-actions d-flex gap-2 mt-2">
-                    <button onClick={() => removeFromCart(item.id)} className="btn btn-danger btn-sm">
+                    <button onClick={() => removeFromCart(item.id)} className="btn btn-remove">
                       <i className="bi bi-trash3"></i> Remove
                     </button>
-                    <button onClick={() => handleMoveToWishlist(item)} className="btn btn-outline-secondary btn-sm">
+                    <button onClick={() => handleMoveToWishlist(item)} className="btn btn-move">
                       <i className="bi bi-heart"></i> Move to Wishlist
                     </button>
                   </div>
@@ -69,25 +69,24 @@ function Cart() {
             ))}
           </div>
           
-          <div className="cart-summary p-4 border rounded shadow-sm h-100" style={{ minWidth: '300px' }}>
-            <h4 className="mb-4">Order Summary</h4>
-            <div className="d-flex justify-content-between mb-2">
+          <div className="cart-summary">
+            <h4>Order Summary</h4>
+            <div className="summary-row">
               <span>Items ({cartCount}):</span>
               <span>{formatINR(cartTotal)}</span>
             </div>
-            <div className="d-flex justify-content-between mb-2">
+            <div className="summary-row">
               <span>GST (18%):</span>
               <span>{formatINR(gst)}</span>
             </div>
-            <hr />
-            <div className="d-flex justify-content-between mb-4 fw-bold fs-5 text-success">
+            <div className="summary-row total">
               <span>Grand Total:</span>
               <span>{formatINR(grandTotal)}</span>
             </div>
-            <button onClick={() => navigate('/checkout')} className="btn btn-success w-100 mb-2 py-2 fw-bold">
-              Proceed to Checkout <i className="bi bi-arrow-right"></i>
+            <button onClick={() => navigate('/checkout')} className="btn-gradient w-100 mb-3 text-center">
+              Proceed to Checkout <i className="bi bi-arrow-right ms-1"></i>
             </button>
-            <button onClick={clearCart} className="btn btn-outline-danger w-100 py-2">
+            <button onClick={clearCart} className="btn btn-clear w-100 py-2">
               Clear Cart
             </button>
           </div>

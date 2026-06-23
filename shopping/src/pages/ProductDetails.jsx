@@ -132,40 +132,37 @@ function ProductDetails() {
                     <h1>{product.title}</h1>
                     
                     <div className="details-rating d-flex align-items-center gap-2 mb-3">
-                        <span className="rating-badge fw-bold px-2 py-1 bg-light rounded text-dark">{rating.toFixed(1)}</span>
-                        <span className="d-flex align-items-center gap-1 fs-6">
-                            {renderStars()}
-                        </span>
-                        <span className="rating-count text-muted ms-1">({reviewCount} reviews)</span>
+                        <span className="rating-badge">{rating.toFixed(1)} <i className="bi bi-star-fill"></i></span>
+                        <span className="rating-count">({reviewCount} reviews)</span>
                     </div>
 
-                    <p className="price text-success fw-bold fs-3">{formatINR(convertToINR(product.price))}</p>
+                    <p className="price">{formatINR(convertToINR(product.price))}</p>
                     <p className="description">{product.description}</p>
                     
                     <div className="d-flex align-items-center gap-3 mb-4 mt-3">
                         <span className="fw-bold">Quantity:</span>
-                        <div className="btn-group" role="group">
-                            <button onClick={() => handleQtyChange(-1)} className="btn btn-outline-secondary" disabled={qty <= 1}>
+                        <div className="qty-selector">
+                            <button onClick={() => handleQtyChange(-1)} className="qty-btn" disabled={qty <= 1}>
                                 <i className="bi bi-dash"></i>
                             </button>
-                            <span className="btn btn-outline-secondary disabled text-dark fw-bold" style={{ width: '50px' }}>{qty}</span>
-                            <button onClick={() => handleQtyChange(1)} className="btn btn-outline-secondary" disabled={qty >= 10}>
+                            <span className="qty-display">{qty}</span>
+                            <button onClick={() => handleQtyChange(1)} className="qty-btn" disabled={qty >= 10}>
                                 <i className="bi bi-plus"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div className="details-buttons d-flex gap-3">
+                    <div className="details-buttons">
                         <button 
                             onClick={() => addToCart({ ...product, quantity: qty })} 
-                            className="add-btn btn btn-primary px-4 py-2"
+                            className="btn-gradient w-100"
                         >
                             <i className="bi bi-cart3 me-2"></i>
                             Add to Cart
                         </button>
                         <button 
                             onClick={handleWishlistClick} 
-                            className={`wishlist-btn-details btn ${inWishlist ? 'btn-danger' : 'btn-outline-secondary'} px-4 py-2`}
+                            className={`wishlist-btn-details ${inWishlist ? 'active' : ''} w-100`}
                         >
                             <i className={`bi ${inWishlist ? 'bi-heart-fill' : 'bi-heart'} me-2`}></i>
                             {inWishlist ? 'In Wishlist' : 'Add to Wishlist'}

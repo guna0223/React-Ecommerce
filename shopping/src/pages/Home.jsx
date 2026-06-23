@@ -56,7 +56,7 @@ function Home() {
       {/* Category Tabs - Desktop Only */}
       <div className="d-none d-md-flex justify-content-center gap-3 my-4 flex-wrap px-3">
         <button 
-          className={`btn ${selectedCategory === 'all' ? 'btn-primary' : 'btn-outline-primary'} rounded-pill px-4`}
+          className={`category-pill ${selectedCategory === 'all' ? 'active' : ''}`}
           onClick={() => setSelectedCategory('all')}
         >
           All
@@ -64,7 +64,7 @@ function Home() {
         {categories.map(cat => (
           <button 
             key={cat}
-            className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-outline-primary'} rounded-pill px-4 text-capitalize`}
+            className={`category-pill text-capitalize ${selectedCategory === cat ? 'active' : ''}`}
             onClick={() => setSelectedCategory(cat)}
           >
             {cat}

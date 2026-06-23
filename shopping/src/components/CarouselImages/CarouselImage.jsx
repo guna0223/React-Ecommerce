@@ -54,15 +54,15 @@ function CarouselImage() {
           className="carousel-track"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {carouselData.map((item) => (
-            <div key={item.id} className="carousel-slide">
+          {carouselData.map((item, index) => (
+            <div key={item.id} className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}>
               <img src={item.image} alt={item.title} />
               <div className="carousel-overlay"></div>
               <div className="carousel-content">
                 <span className="carousel-subtitle">{item.subtitle}</span>
                 <h2 className="carousel-title">{item.title}</h2>
                 <p className="carousel-description">{item.description}</p>
-                <button className="carousel-btn">Shop Now</button>
+                <button className="btn-gradient">Shop Now</button>
               </div>
             </div>
           ))}

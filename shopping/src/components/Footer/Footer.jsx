@@ -9,7 +9,7 @@ const Footer = () => {
         {/* About Section */}
         <div className="footer-about">
           <div className="footer-logo">
-            <span className="v">V</span><span className="exo">EXO</span>
+            VEXO
           </div>
           <p>
             Your premier destination for premium products at unbeatable prices. 
@@ -17,16 +17,16 @@ const Footer = () => {
           </p>
           <div className="footer-social">
             <a href="#" className="social-icon" aria-label="Facebook">
-              <i className="bi bi-facebook"></i>
+              <i className="fa-brands fa-facebook-f"></i>
             </a>
             <a href="#" className="social-icon" aria-label="Twitter">
-              <i className="bi bi-twitter-x"></i>
+              <i className="fa-brands fa-x-twitter"></i>
             </a>
             <a href="#" className="social-icon" aria-label="Instagram">
-              <i className="bi bi-instagram"></i>
+              <i className="fa-brands fa-instagram"></i>
             </a>
             <a href="#" className="social-icon" aria-label="YouTube">
-              <i className="bi bi-youtube"></i>
+              <i className="fa-brands fa-youtube"></i>
             </a>
           </div>
         </div>
